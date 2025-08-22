@@ -15,11 +15,13 @@ const port = 5000;
 //     res.send("login page")
 // })
 
+// set views forlder 
+
 app.set("view engine","ejs");
 
 
 app.get("/",(req,res)=>{
-    res.send("<h1>hello node class augest node js </h1>")
+    res.send("Welcome  node Page")
 })
 
 app.get("/home",(req,res)=>{
@@ -35,6 +37,8 @@ app.get("/signup",(req,res)=>{
     res.render("Signup")
 })
 
+// public folder
+app.use(express.static("public"))
 
 
 
@@ -85,8 +89,7 @@ app.get("/signup",(req,res)=>{
 
 
 
-
-
+// server port no set 
 app.listen(port,()=>{
     console.log("server start")
 })
