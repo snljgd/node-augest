@@ -1,7 +1,13 @@
+
 const express =require('express');
 const app = express();
 
 const port = 5000;
+
+// bodyParser
+const bodyParser = require('body-parser');
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded)   
 
 
 // app.get("/",(req,res)=>{
@@ -42,8 +48,20 @@ app.use(express.static("public"))
 
 
 
+// api get
 
+app.get("/users",(req,res)=>{
+    res.send({
+        "name":"John Doe",
+        "email":"john@example.com"
+    })
+}) 
+ 
+// post api 
 
+app.post("/signup",(req,res)=>{
+    console.log(req.body);
+})
 
 
 
