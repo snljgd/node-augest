@@ -5,6 +5,10 @@ body, h2, form, input, button {
   box-sizing: border-box;
 }
 
+h2{
+  text-align: center;
+}
+
 /* Page background */
 body {
   font-family: Arial, sans-serif;
@@ -17,10 +21,11 @@ body {
 
 /* Signup box */
 .login-container {
+  box-shadow: rgba(0, 0, 0, 0.70) 0px 5px 15px;
   background: #fff;
   padding: 25px;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  
   width: 100%;
   max-width: 380px;
 }

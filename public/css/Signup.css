@@ -20,7 +20,7 @@ body {
   background: #fff;
   padding: 25px;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+   box-shadow: rgba(0, 0, 0, 0.70) 0px 5px 15px;
   width: 100%;
   max-width: 380px;
 }
