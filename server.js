@@ -7,7 +7,7 @@ const port = 5000;
 // bodyParser
 const bodyParser = require('body-parser');
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded)   
+app.use(bodyParser.urlencoded());
 
 
 // app.get("/",(req,res)=>{
@@ -50,25 +50,46 @@ app.use(express.static("public"))
 
 // api get
 
-app.get("/users",(req,res)=>{
-    res.send({
-        "name":"John Doe",
-        "email":"john@example.com"
-    })
-}) 
+// app.get("/users",(req,res)=>{
+//     res.send({
+//         "name":"John Doe",
+//         "email":"john@example.com"
+//     })
+// }) 
  
-// post api 
 
-app.post("/signup",(req,res)=>{
-    console.log(req.body);
+// post api
+
+
+
+
+// mongodb---------------------
+const { MongoClient } = require('mongodb');
+let client = new MongoClient("mongodb://0.0.0.0:27017");
+
+// a function for mongodb connection 
+async function groot(){
+    let a= await client.connect()
+    let b= a.db("nodedata")
+    let c= b.collection("users")
+    let result = await c.find({}).toArray()
+    console.log(result);
+}
+
+
+app.post("/signup",async (req,res)=>{
+
+    let a= await client.connect()
+    let b= a.db("nodedata")
+    let c= b.collection("users")
+
+    let result = await c.insertOne(req.body).then(()=>{
+        res.redirect("/login");
+    })
+    // console.log(req.body);
 })
 
-
-
-
-
-
-
+   
 
 
 
@@ -109,6 +130,6 @@ app.post("/signup",(req,res)=>{
 
 // server port no set 
 app.listen(port,()=>{
-    console.log("server start")
+    console.log("server run start")
 })
 
