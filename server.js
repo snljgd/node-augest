@@ -85,13 +85,25 @@ app.post("/signup",async (req,res)=>{
 
     let result = await c.insertOne(req.body).then(()=>{
         res.redirect("/login");
-    })
-    // console.log(req.body);
+    })  
 })
 
    
 
+app.post("/login",async(req,res)=>{
 
+    let a = await client.connect()
+    let b = a.db("nodedata")
+    let c = b.collection("users")
+    let result = await c.find({"email":req.body.email,"password":req.body.password}).toArray().
+    then((result)=>{
+        if(result.length >0){
+            res.redirect("/home"); 
+        }else{
+            res.send("/enter valid email and password");
+        }
+    })
+})
 
 
 
@@ -132,4 +144,3 @@ app.post("/signup",async (req,res)=>{
 app.listen(port,()=>{
     console.log("server run start")
 })
-
