@@ -1,5 +1,9 @@
 /* Reset default styles */
-body, h2, form, input, button {
+body,
+h2,
+form,
+input,
+button {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -8,7 +12,7 @@ body, h2, form, input, button {
 /* Page background */
 body {
   font-family: Arial, sans-serif;
-  background: #f0f4f8;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,7 +24,7 @@ body {
   background: #fff;
   padding: 25px;
   border-radius: 8px;
-   box-shadow: rgba(0, 0, 0, 0.70) 0px 5px 15px;
+  box-shadow: rgba(0, 0, 0, 0.7) 0px 5px 15px;
   width: 100%;
   max-width: 380px;
 }

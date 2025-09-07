@@ -1,5 +1,5 @@
 
-const express =require('express');
+const express = require('express');
 const app = express();
 
 const port = 5000;
@@ -23,26 +23,29 @@ app.use(bodyParser.urlencoded());
 
 // set views forlder 
 
-app.set("view engine","ejs");
+app.set("view engine", "ejs");
 
 
-app.get("/",(req,res)=>{
+app.get("/", (req, res) => {
     res.send("Welcome  node Page")
 })
 
-app.get("/home",(req,res)=>{
+app.get("/home", (req, res) => {
     res.render("Home")
 })
 
 
-app.get("/login",(req,res)=>{
+app.get("/login", (req, res) => {
     res.render("Login")
 })
 
-app.get("/signup",(req,res)=>{
+app.get("/signup", (req, res) => {
     res.render("Signup")
 })
 
+app.get("/forgot", (req, res) => {
+    res.render("Forgot")
+})
 // public folder
 app.use(express.static("public"))
 
@@ -56,7 +59,7 @@ app.use(express.static("public"))
 //         "email":"john@example.com"
 //     })
 // }) 
- 
+
 
 // post api
 
@@ -68,41 +71,56 @@ const { MongoClient } = require('mongodb');
 let client = new MongoClient("mongodb://0.0.0.0:27017");
 
 // a function for mongodb connection 
-async function groot(){
-    let a= await client.connect()
-    let b= a.db("nodedata")
-    let c= b.collection("users")
+async function groot() {
+    let a = await client.connect()
+    let b = a.db("nodedata")
+    let c = b.collection("users")
     let result = await c.find({}).toArray()
     console.log(result);
 }
 
 
-app.post("/signup",async (req,res)=>{
-
-    let a= await client.connect()
-    let b= a.db("nodedata")
-    let c= b.collection("users")
-
-    let result = await c.insertOne(req.body).then(()=>{
-        res.redirect("/login");
-    })  
-})
-
-   
-
-app.post("/login",async(req,res)=>{
+app.post("/signup", async (req, res) => {
 
     let a = await client.connect()
     let b = a.db("nodedata")
     let c = b.collection("users")
-    let result = await c.find({"email":req.body.email,"password":req.body.password}).toArray().
-    then((result)=>{
-        if(result.length >0){
-            res.redirect("/home"); 
-        }else{
-            res.send("enter valid email and password");
-        }
+
+    let result = await c.insertOne(req.body).then(() => {
+        res.redirect("/login");
     })
+})
+
+
+
+app.post("/login", async (req, res) => {
+
+    let a = await client.connect()
+    let b = a.db("nodedata")
+    let c = b.collection("users")
+    let result = await c.find({ "email": req.body.email, "password": req.body.password }).
+        toArray().
+        then((result) => {
+            if (result.length > 0) {
+                res.redirect("/home");
+            } else {
+                res.send("enter valid email and password");
+            }
+        })
+})
+
+
+// forgotpassword -------------
+
+app.post("/forgot", async (req, res) => {
+    let a = await client.connect()
+    let b = await a.db("nodedata")
+    let c = await b.collection("users")
+    let result = await c.updateOne(
+        {"email": req.body.email},
+        { $set: {"password": req.body.password } }).then(() => {
+            res.redirect("/login")
+        })
 })
 
 
@@ -141,6 +159,6 @@ app.post("/login",async(req,res)=>{
 
 
 // server port no set 
-app.listen(port,()=>{
+app.listen(port, () => {
     console.log("server run start")
 })

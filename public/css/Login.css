@@ -12,7 +12,7 @@ h2{
 /* Page background */
 body {
   font-family: Arial, sans-serif;
-  background: #f0f4f8;
+background: linear-gradient(135deg, #6a11cb, #2575fc);
   display: flex;
   justify-content: center;
   align-items: center;
