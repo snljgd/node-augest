@@ -100,7 +100,7 @@ app.post("/login",async(req,res)=>{
         if(result.length >0){
             res.redirect("/home"); 
         }else{
-            res.send("/enter valid email and password");
+            res.send("enter valid email and password");
         }
     })
 })
