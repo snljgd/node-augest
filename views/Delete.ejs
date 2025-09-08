@@ -4,15 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>deleteaccount</title>
+    <link rel="stylesheet" href="/css/delete.css">
 </head>
 <body>
-    <form action="/delete" method="post">
+         <div class="delete-account">
+
+        <form action="/delete" method="post">
         <h2>Delete Account</h2>
+        <label for="enter your email"></label>
+        <input type="email" id="email" name="email" placeholder="enter your mail" required >
         <p>Are you sure you want to delete your account?</p>
         <button type="submit" class="btn">Delete Account</button>
-
-        
+        <button type="reset" class="btn">Reset 
+        </button>
    
     </form>
+    </div>
 </body>
 </html>

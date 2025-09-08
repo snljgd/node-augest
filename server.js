@@ -46,6 +46,15 @@ app.get("/signup", (req, res) => {
 app.get("/forgot", (req, res) => {
     res.render("Forgot")
 })
+
+app.get("/delete",(req,res)=>{
+    res.render("Delete")
+})
+
+app.get("/signup.ejs",(req,res)=>{
+    res.render("signup.ejs")
+})
+
 // public folder
 app.use(express.static("public"))
 
@@ -79,7 +88,7 @@ async function groot() {
     console.log(result);
 }
 
-
+// mongodb data insert api
 app.post("/signup", async (req, res) => {
 
     let a = await client.connect()
@@ -92,7 +101,7 @@ app.post("/signup", async (req, res) => {
 })
 
 
-
+// login api 
 app.post("/login", async (req, res) => {
 
     let a = await client.connect()
@@ -123,7 +132,17 @@ app.post("/forgot", async (req, res) => {
         })
 })
 
-
+// delete account api 
+app.post("/delete",async(req,res)=>{
+     let a = await client.connect()
+    let b = await a.db("nodedata")
+    let c = await b.collection("users")
+    let result = await c.findOneAndDelete(
+        {"email": req.body.email},
+        { $set: {"password": req.body.password } }).then(() => {
+            res.render("Login");
+        })
+})
 
 
 
