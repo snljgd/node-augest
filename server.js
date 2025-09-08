@@ -119,7 +119,7 @@ app.post("/forgot", async (req, res) => {
     let result = await c.updateOne(
         {"email": req.body.email},
         { $set: {"password": req.body.password } }).then(() => {
-            res.redirect("/login")
+            res.render("Login");
         })
 })
 
