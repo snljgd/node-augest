@@ -26,16 +26,13 @@ app.use(bodyParser.urlencoded());
 app.set("view engine", "ejs");
 
 
-app.get("/", (req, res) => {
-    res.send("Welcome  node Page")
-})
 
 app.get("/home", (req, res) => {
     res.render("Home")
 })
 
 
-app.get("/login", (req, res) => {
+app.get("/", (req, res) => {
     res.render("Login")
 })
 
