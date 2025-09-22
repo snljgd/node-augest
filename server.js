@@ -5,8 +5,9 @@ const app = express();
 const port = 5000;
 
 // bodyParser
+
 const bodyParser = require('body-parser');
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 
 
@@ -40,9 +41,10 @@ app.get("/signup", (req, res) => {
     res.render("Signup")
 })
 
-app.get("/forgot", (req, res) => {
+app.get("/forgot",(req, res) => {
     res.render("Forgot")
 })
+
 
 app.get("/delete",(req,res)=>{
     res.render("Delete")
@@ -117,7 +119,6 @@ app.post("/login", async (req, res) => {
 
 
 // forgotpassword -------------
-
 app.post("/forgot", async (req, res) => {
     let a = await client.connect()
     let b = await a.db("nodedata")
@@ -128,6 +129,8 @@ app.post("/forgot", async (req, res) => {
             res.render("Login");
         })
 })
+
+
 
 // delete account api 
 app.post("/delete",async(req,res)=>{
